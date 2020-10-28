@@ -1,0 +1,7 @@
+---
+- name: Ping all nodes
+  ping:  
+
+- name: Print hostname of all hosts    
+  debug:
+    msg: '{{ ansible_hostname }}'      

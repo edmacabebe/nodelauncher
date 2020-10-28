@@ -1,0 +1,6 @@
+---
+- tasks:
+  - name: Check if Apache is already installed
+    shell: dpkg -s apache2 | grep Status
+    register: apache2_is_installed  
+    failed_when: no

@@ -1,0 +1,9 @@
+---
+- name: handshake and say hello
+  hosts: secure
+  remote_user: nladmin
+  become: yes
+  tasks:
+    - name: Pingers
+      include_role:
+        name: tests

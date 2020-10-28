@@ -1,0 +1,10 @@
+- hosts: secure
+  user: nladmin
+  become: True
+  tasks:
+    - name: Ping all secure nodes
+      ping:
+
+    - name: Print hostname of all hosts    
+      debug:
+        msg: '{{ ansible_hostname }}'    

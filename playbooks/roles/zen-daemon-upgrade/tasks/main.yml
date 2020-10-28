@@ -1,0 +1,38 @@
+---
+- name: Update Zen List
+  shell: sed -i 's/[zZ][eE][nN][cC][aA][sS][hH][oO][fF][fF][iI][cC][iI][aA][lL]/HorizenOfficial/g' /etc/apt/sources.list.d/zencashofficial_github_io_repo.list 
+  become: yes
+
+- name: Rename zencashofficial_github_io_repo to zen.list
+  command: mv /etc/apt/sources.list.d/zencashofficial_github_io_repo.list  /etc/apt/sources.list.d/zen.list 
+  become: yes
+
+- name: Update Apt Cache and confirm repo update
+  command: yes '' | apt-get update
+  become: yes
+
+- name: Update apt cache and install zen, install new zen daemon if available
+  shell: rm -r /var/lib/apt/lists/* && apt-get update && apt-get install zen
+  become: yes 
+
+- name: Download the required parameters for Zend
+  command: zen-fetch-params
+  become: yes
+
+- name: Stop zend after the upgrade has completed
+  command: systemctl stop zend
+  become: yes
+  
+- name: Show zend version, expect 2.0.22
+  command: zend --version
+  register: zend_version
+
+- debug: msg='{{ zend_version.stdout_lines }}'
+
+- name: Start Zend 
+  command: systemctl start zend
+  become: yes
+  
+- name: Restart Zentracker 
+  command: systemctl restart zentracker  
+  become: yes

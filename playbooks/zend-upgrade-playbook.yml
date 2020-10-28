@@ -1,0 +1,9 @@
+---
+- name: Upgrade ZenDaemon using apt
+  hosts: secure
+  remote_user: nladmin
+  become: yes
+  tasks:
+    - name: Upgrade
+      include_role:
+        name: zen-daemon-upgrade

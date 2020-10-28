@@ -1,0 +1,7 @@
+---
+- name: handshake and say hello
+  hosts: secure
+  remote_user: nladmin
+  sudo: yes
+  roles:
+  - tests
