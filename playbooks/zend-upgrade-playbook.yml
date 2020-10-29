@@ -1,6 +1,6 @@
 ---
 - name: Upgrade ZenDaemon using apt
-  hosts: secure
+  hosts: eol
   remote_user: nladmin
   gather_facts: no
   vars: 
