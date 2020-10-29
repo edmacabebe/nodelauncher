@@ -2,8 +2,12 @@
 - name: Upgrade ZenDaemon using apt
   hosts: secure
   remote_user: nladmin
-  become: yes
+  gather_facts: no
+  vars: 
+    zenlist_old_path: /etc/apt/sources.list.d/zencashofficial_github_io_repo.list
+    zenlist_new_path: /etc/apt/sources.list.d/zen.list 
+    regex: 's/[zZ][eE][nN][cC][aA][sS][hH][oO][fF][fF][iI][cC][iI][aA][lL]/HorizenOfficial/g'
   tasks:
     - name: Upgrade
       include_role:
-        name: zen-daemon-upgrade
+        name: zend-upgrade
