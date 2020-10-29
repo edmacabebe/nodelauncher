@@ -20,12 +20,7 @@
   when: new_zenlist_exist.stat.exists == True 
 
 - name: Update Apt Cache and confirm repo update
-  apt:
-    name: "*"
-    state: latest
-    force_apt_get: true
-    update_cache: true
-    become: true
+  apt: update_cache=yes force_apt_get=yes
 
 - name: Remove current apt zen lib
   shell: rm -r /var/lib/apt/lists/* 
@@ -33,11 +28,10 @@
 
 - name: Update apt cache and install zen, install new zen daemon if available
   apt:
-    name: zen
-    state: latest
-    update_cache: true
-    force_apt_get: true
-    become: true
+    name=zen
+    state=latest
+    update_cache=yes
+    force_apt_get=yes
 
 - name: Download the required parameters for Zend
   command: zen-fetch-params
