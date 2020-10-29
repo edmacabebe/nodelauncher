@@ -52,7 +52,7 @@
   become: true
 
 - name: Show zend version, expect 2.0.22
-  command: zend --version
+  command: zend --version | grep version
   register: zend_version
 
 - debug: msg='{{ zend_version }}'
